@@ -38,11 +38,19 @@ app.get('/', (req, res, next) => {
 app.get('/products', (req, res, next) => {
 	Products.findAll()
 		.then(results => res.send(results))
+    .catch(next)
+})
+
+app.get('/products/:id', (req, res, next) => {
+  Products.findById(req.params.id)
+    .then( products => res.send(products) )
+    .catch(next)
 })
 
 app.get('/categories', (req, res, next) => {
 	Categories.findAll()
 		.then(results => res.send(results))
+    .catch(next)
 })
 
 app.listen(3000, ()=> console.log('LISTENING'))
